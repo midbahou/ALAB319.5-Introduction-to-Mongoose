@@ -17,3 +17,5 @@ const learnerSchema = new mongoose.Schema({
 
     }
 })
+
+export default mongoose.model("Grades", learnerSchema)
