@@ -56,7 +56,7 @@ router.post("/", async (req, res) => {
 });
 
 // Add a score to a grade entry
-router.patch("/:id/add", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   let collection = await db.collection("grades");
   let query = { _id: new ObjectId(req.params.id) };
 
@@ -68,18 +68,6 @@ router.patch("/:id/add", async (req, res) => {
   else res.send(result).status(200);
 });
 
-// Remove a score from a grade entry
-router.patch("/:id/remove", async (req, res) => {
-  let collection = await db.collection("grades");
-  let query = { _id: new ObjectId(req.params.id) };
-
-  let result = await collection.updateOne(query, {
-    $pull: { scores: req.body },
-  });
-
-  if (!result) res.send("Not found").status(404);
-  else res.send(result).status(200);
-});
 
 // Delete a single grade entry
 router.delete("/:id", async (req, res) => {
